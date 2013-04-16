@@ -47,6 +47,10 @@ JS;
 	 * @return boolean
 	 */
 	public function validate($validator) {
+		if(!$this->value && !$validator->fieldIsRequired($this->name)) {
+			return true;
+		}
+		
 		$valid = preg_match(
 			'/^[A-z]{2}[0-9]{6}$/',
 			$this->value
@@ -62,5 +66,7 @@ JS;
 
 			return false;
 		}
+
+		return true;
 	}
 }
