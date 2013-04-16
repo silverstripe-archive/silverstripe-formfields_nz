@@ -10,7 +10,7 @@ class IrdNumberField extends TextField {
 	
 	public function Field() {
 		$valArr = ($this->value) ? explode('-', $this->value) : null;
-
+		
 		// fields
 		$first = new NumericField($this->name . '[first]', false, ($valArr) ? array_shift($valArr) : null);
 		$first->setMaxLength(3);
@@ -46,6 +46,10 @@ class IrdNumberField extends TextField {
 			else {
 				$this->value = $val;
 			}
+		}
+
+		if(trim($this->value, '-') == "") {
+			$this->value = "";
 		}
 	}
 
@@ -87,12 +91,16 @@ JS;
 	 * @return boolean
 	 */
 	public function validate($validator) {
+		if(!$this->value && !$validator->fieldIsRequired($this->name)) {
+			return true;
+		}		
+
 		$valid = preg_match(
-			'/^[0-9]{2}[\-]?[0-9]{3}[\-]?[0-9]{3}$/',
+			'/^[0-9]{2,3}[\-]?[0-9]{3}[\-]?[0-9]{3}$/',
 			$this->value
 		);
 		
-		if(!$valid){
+		if(!$valid) {
 			$validator->validationError(
 				$this->name, 
 				_t('IrdNumberField.VALIDATION', "Please enter a valid IRD Number"),
@@ -102,5 +110,7 @@ JS;
 
 			return false;
 		}
+
+		return true;
 	}
 }
