@@ -3,11 +3,14 @@
 	"description": "New Zealand specific form fields",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "forms", "new zealand"],
-	"license": "BSD",
+	"license": "BSD-3-Clause",
 	"authors": [{
 		"name": "Ingo Schommer",
 		"email": "ingo@silverstripe.com"
 	}],
+	"extra": {
+	   "installer-name": "postmarkmailer"
+    	},
 	"require": {
 		"silverstripe/framework": "~2.4"
 	}
