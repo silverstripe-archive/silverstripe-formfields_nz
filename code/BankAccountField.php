@@ -1,8 +1,10 @@
 <?php
+
 /**
- * Field for displaying bank account numbers. It separates the bank, branch, account-number and account-suffix.
- * @package forms
- * @subpackage fields-formattedinput
+ * Field for displaying bank account numbers. It separates the bank, branch, 
+ * account-number and account-suffix.
+ *
+ * @package formfields_nz
  */
 class BankAccountField extends FormField {
 	
@@ -19,6 +21,10 @@ class BankAccountField extends FormField {
 	 * HACK Proper requiring of compositefields would involve serious restructuring.
 	 */
 	public $isRequired = false;
+
+	/**
+	 * @var array
+	 */
 	public $requiredFields = array(
 		"BankCode",
 		"BranchCode",
@@ -26,7 +32,6 @@ class BankAccountField extends FormField {
 	);
 	
 	public function __construct($name, $title, $value = null, $bankCode = null, $branchCode = null, $form = null) {
-		
 		$this->bankCode = $bankCode;
 		$this->branchCode = $branchCode;
 		
